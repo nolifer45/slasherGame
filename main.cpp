@@ -12,13 +12,12 @@ Vector2 checkKeys(Vector2 direction)
     return direction;
 }
                                                                                                                                                                                                                 
-Vector2 updateMapPos(Vector2 mapPos, Vector2 subVector,float movementSpeed, Vector2 knightPos) 
+Vector2 updateMapPos(Vector2 mapPos, Vector2 subVector,float movementSpeed,bool updateKnight) 
 {
     mapPos = Vector2Add(mapPos, Vector2Scale(Vector2Normalize(subVector),movementSpeed));
     if (mapPos.x > 0)
     {
         mapPos.x = 0;
-        //updateKnightPos(knightPos,subVector,movementSpeed);
     }
     else if (mapPos.x < -2304.0)
     {
@@ -31,13 +30,14 @@ Vector2 updateMapPos(Vector2 mapPos, Vector2 subVector,float movementSpeed, Vect
     else if (mapPos.y < -2304.0)
     {
         mapPos.y = -2304.0;
-
-    }
+    } 
     return mapPos;
 }
 
 Vector2 updateKnightPos(Vector2 knightPos,Vector2 subVector,float movementSpeed) {
-
+    subVector = {-subVector.x,-subVector.y};
+    knightPos = Vector2Add(knightPos, Vector2Scale(Vector2Normalize(subVector),movementSpeed));
+    return knightPos;
 }
 
 float checkRightLeft(float xDirection) {
@@ -60,6 +60,7 @@ int main()
         windowDimensions[1]/2 - 8.0F*(0.5F*(float)knight.height)
     };
 
+    bool shouldUpdateKnight = true;
     float rightLeft{1.f};
 
     while(!WindowShouldClose())
@@ -75,7 +76,9 @@ int main()
 
         if (Vector2Length(direction) != 0.0)
         {
-            mapPos = updateMapPos(mapPos,direction,speed);
+            mapPos = updateMapPos(mapPos,direction,speed,shouldUpdateKnight);
+            knightPos = updateKnightPos(knightPos,direction,speed);
+
             //Set direction left/right
             if (direction.x != 0) {
                 rightLeft = checkRightLeft(direction.x);
@@ -98,4 +101,5 @@ int main()
     //Unload program assets 
     CloseWindow();
     UnloadTexture(map);
+    UnloadTexture(knight);
 }
