@@ -12,13 +12,13 @@ Vector2 checkKeys(Vector2 direction)
     return direction;
 }
                                                                                                                                                                                                                 
-Vector2 updateMapPos(Vector2 mapPos, Vector2 subVector,float movementSpeed, Vector2 knightPos) 
+Vector2 updateMapPos(Vector2 mapPos, Vector2 subVector,float movementSpeed) 
 {
     mapPos = Vector2Add(mapPos, Vector2Scale(Vector2Normalize(subVector),movementSpeed));
     if (mapPos.x > 0)
     {
         mapPos.x = 0;
-        //updateKnightPos(knightPos,subVector,movementSpeed);
+
     }
     else if (mapPos.x < -2304.0)
     {
