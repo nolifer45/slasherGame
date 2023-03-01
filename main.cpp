@@ -2,6 +2,8 @@
 #include "raymath.h"
 #include <stdio.h>
 
+const float speed{0.345};
+
 Vector2 checkKeys(Vector2 direction)
 {
 
@@ -12,9 +14,9 @@ Vector2 checkKeys(Vector2 direction)
     return direction;
 }
                                                                                                                                                                                                                 
-Vector2 updateMapPos(Vector2 mapPos, Vector2 subVector,float movementSpeed) 
+Vector2 updateMapPos(Vector2 mapPos, Vector2 subVector) 
 {
-    mapPos = Vector2Add(mapPos, Vector2Scale(Vector2Normalize(subVector),movementSpeed));
+    mapPos = Vector2Add(mapPos, Vector2Scale(Vector2Normalize(subVector),speed));
     if (mapPos.x > 0)
     {
         mapPos.x = 0;
@@ -36,8 +38,12 @@ Vector2 updateMapPos(Vector2 mapPos, Vector2 subVector,float movementSpeed)
     return mapPos;
 }
 
-Vector2 updateKnightPos(Vector2 knightPos,Vector2 subVector,float movementSpeed) {
+bool borderCheckMap(Vector2 knightpos){
+    //
+}
 
+Vector2 updateKnightPos(Vector2 knightPos,Vector2 subVector) {
+    //
 }
 
 float checkRightLeft(float xDirection) {
@@ -48,7 +54,6 @@ float checkRightLeft(float xDirection) {
 int main()
 {
     const float windowDimensions[2]{768.0,768.0};
-    float speed{0.345};
     InitWindow(windowDimensions[0],windowDimensions[1],"slasher!");
 
     Texture2D map = LoadTexture("/Users/Niko/Documents/GameDev/ultimateSlash/nature_tileset/WorldMapv2.png");
