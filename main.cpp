@@ -40,14 +40,14 @@ int main()
     const float windowDimensionVector[2]{768.0, 768.0};
     InitWindow(windowDimensionVector[0], windowDimensionVector[1], "slasher!");
 
-    Texture2D map = LoadTexture("/Users/Niko/Documents/GameDev/ultimateSlash/nature_tileset/WorldMapv2.png");
+    Texture2D map = LoadTexture("./nature_tileset/WorldMapv2.png");
     Vector2 mapPosition{};
 
     //Init player character
     Character knight(windowDimensionVector[0],windowDimensionVector[1]);
 
     //Inite props
-    Prop stone(mapPosition,LoadTexture(/Users/Niko/Documents/GameDev/ultimateSlash/nature_tileset/Rock.png));
+    Prop stone(mapPosition,LoadTexture("./nature_tileset/Rock.png"));
 
     while (!WindowShouldClose())
     {
@@ -62,7 +62,7 @@ int main()
         // Draw the map
         DrawTextureEx(map, mapPosition, 0.0, 4.0, WHITE);
         knight.tick(GetFrameTime());  
-        stone.render(knight.getWorldPosition();)
+        stone.Render(knight.getWorldPosition());
         EndDrawing();
         
     }
